@@ -18,6 +18,7 @@ public class RCategoriaController {
 	@Autowired
 	ICategoria serviceCategoria;
 
+	
 	@GetMapping("/lista")
 	public ResponseEntity<Map<String, Object>> lista_Categoria() {
 		
