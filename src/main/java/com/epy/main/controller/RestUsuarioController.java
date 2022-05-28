@@ -17,8 +17,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.epy.main.dto.PersonaDTO;
 import com.epy.main.entity.Authority;
 import com.epy.main.entity.Persona;
 import com.epy.main.entity.User;
@@ -94,8 +92,7 @@ public class RestUsuarioController {
 				} else {
 					salida.put("mensaje", "error en el registro");
 				}
-					
-				
+						
 			}else {
 				salida.put("mensaje", "EL USUARIO YA EXISTE DNI:"+ obj.getDni());
 				
@@ -110,4 +107,12 @@ public class RestUsuarioController {
 		 
 		return ResponseEntity.ok(salida);
 	}
+	
+	
+	
+	
+	
+	
+	
+	
 }
