@@ -17,11 +17,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	String recursos []= {"/css/**","/fonts/**","/images/**","/js/**","/libs/**"};  
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		
+		http.csrf().disable();
 		http.authorizeRequests()
 		.antMatchers(recursos).permitAll()
 		
-		.antMatchers("/").permitAll()
+		.antMatchers("/").permitAll()/*
 		.antMatchers("/config*").access("hasRole('ADMIN')")
 		.antMatchers("/rep*").access("hasRole('OPERADOR') or hasRole('ADMIN')")
 		.antMatchers("/reg*").access("hasRole('NEGOCIO') or hasRole('OPERADOR') or hasRole('ADMIN')")
@@ -37,7 +37,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.and()
 		.logout()
 			.permitAll()
-			.logoutSuccessUrl("/logout");
+			.logoutSuccessUrl("/logout")*/;
 		
 	}
 	
