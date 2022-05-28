@@ -30,4 +30,14 @@ public class CategoriaService implements ICategoria {
 		return res;
 	}
 
+	@Override
+	public List<Categoria> findByDescripcion(String descripcion) {
+		return categoriaRepository.findByDescripcion(descripcion);
+	}
+
+	@Override
+	public Categoria findByIdCategoria(int idCategoria) {
+		return categoriaRepository.findByIdCategoria(idCategoria);
+	}
+
 }

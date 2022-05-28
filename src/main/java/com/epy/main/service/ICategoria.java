@@ -8,6 +8,8 @@ public interface ICategoria {
 	
 	public List<Categoria> listar();
 	public int guardar(Categoria categoria);
+	public List<Categoria> findByDescripcion(String descripcion);
+	public Categoria findByIdCategoria(int idCategoria);
 	
 
 	

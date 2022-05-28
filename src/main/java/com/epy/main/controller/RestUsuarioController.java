@@ -17,8 +17,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.epy.main.dto.PersonaDTO;
 import com.epy.main.entity.Authority;
 import com.epy.main.entity.Persona;
 import com.epy.main.entity.User;
@@ -56,9 +54,10 @@ public class RestUsuarioController {
 			
 			System.out.println("LISTA SIZE : " +listaPersona.size());
 			if (listaPersona.size()  == 0) {
+				System.out.println("INGRESA A REGISTRAR");
 				BCryptPasswordEncoder encriptado = new BCryptPasswordEncoder(4);
 				Persona persona = new Persona();
-				persona.setIdpersona(obj.getIdpersona());
+				//persona.setIdpersona(obj.getIdpersona());
 				persona.setNombre(obj.getNombre());
 				persona.setApellidos(obj.getApellidos());
 				persona.setDni(obj.getDni());
@@ -78,22 +77,26 @@ public class RestUsuarioController {
 					user.setUsername(obj.getDni());
 				}
 				
+				Authority objAuthority = new Authority();
+				objAuthority.setId(1);
+				user.setEnabled(true);
+				user.setAuthority(objAuthority);
+				user.setPersona(persona);
+				persona.setUser(user);
+				
 				int rptaGuardar = servicePersona.guardar(persona);
-				System.out.println("Registro : "+rptaGuardar);
-				
-				
+				serviceUsuario.guardar(user);
+
 				if (rptaGuardar > 0) {
 					salida.put("mensaje", "REGISTRO EXITOSO");
 				} else {
 					salida.put("mensaje", "error en el registro");
 				}
-					
-				
+						
 			}else {
 				salida.put("mensaje", "EL USUARIO YA EXISTE DNI:"+ obj.getDni());
 				
 			}
-			
 			
 		} catch (Exception e) {
 			System.out.println("Error : " + e.getMessage());
@@ -104,4 +107,12 @@ public class RestUsuarioController {
 		 
 		return ResponseEntity.ok(salida);
 	}
+	
+	
+	
+	
+	
+	
+	
+	
 }
