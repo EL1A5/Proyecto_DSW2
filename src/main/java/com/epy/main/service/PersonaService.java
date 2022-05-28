@@ -53,6 +53,12 @@ public class PersonaService implements IPersona {
 		return lista;
 	}
 
+	@Override
+	public List<PersonaDTO> buscarDni(String dni) {
+		// TODO Auto-generated method stub
+		return personaRepository.findByDni(dni);
+	}
+
 	
 	
 	

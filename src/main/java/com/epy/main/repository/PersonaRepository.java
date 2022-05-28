@@ -38,6 +38,8 @@ public interface PersonaRepository extends JpaRepository<Persona, Integer> {
 			)
 	public List<PersonaDTO> fetchConsultaUsuariofindApellidoInnerJoin(String apellido);
 	
+	public List<PersonaDTO>findByDni(String dni);
+	
 	
 	
 	
