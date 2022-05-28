@@ -12,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,33 +41,33 @@ public class RestUsuarioController {
 	}
 	
 	
-	
 	@PostMapping
 	@ResponseBody
-	public  ResponseEntity<Map<String, Object>> insertaUser(@RequestBody Persona obj, @RequestBody Authority obj2){
+	public  ResponseEntity<Map<String, Object>> insertaUser(@RequestBody Persona obj){
 		Map<String, Object> salida = new HashMap<>();
 		try {
-			
+			System.out.println(obj.getIdpersona());
+			System.out.println(obj.getDni());
+			System.out.println(obj.getApellidos());
 			Date date = new Date();
-			SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			List<PersonaDTO> listproduct=servicePersona.buscarDni(obj.getDni());
+			SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");	
 			
+			List<Persona> listaPersona=servicePersona.buscarDni(obj.getDni());
 			
-			Authority objAuthority = new Authority();
-			objAuthority.setId(obj2.getId());
-			BCryptPasswordEncoder encriptado = new BCryptPasswordEncoder(4);
-			Persona persona = new Persona();
-			persona.setIdpersona(obj.getIdpersona());
-			persona.setNombre(obj.getNombre());
-			persona.setApellidos(obj.getApellidos());
-			persona.setDni(obj.getDni());
-			persona.setCelular(obj.getCelular());
-			persona.setTelefono(obj.getTelefono());
-			persona.setFechaRegistro(formato.format(date));
-			Optional<User> usuarioBusqueda = serviceUsuario.buscarUsuario(obj.getDni());
-			
-			if (listproduct==null) {
-
+			System.out.println("LISTA SIZE : " +listaPersona.size());
+			if (listaPersona.size()  == 0) {
+				BCryptPasswordEncoder encriptado = new BCryptPasswordEncoder(4);
+				Persona persona = new Persona();
+				persona.setIdpersona(obj.getIdpersona());
+				persona.setNombre(obj.getNombre());
+				persona.setApellidos(obj.getApellidos());
+				persona.setDni(obj.getDni());
+				persona.setCelular(obj.getCelular());
+				persona.setTelefono(obj.getTelefono());
+				persona.setFechaRegistro(formato.format(date));
+				
+				Optional<User> usuarioBusqueda = serviceUsuario.buscarUsuario(obj.getDni());
+				
 				User user = new User();
 				if (usuarioBusqueda.isPresent()) {
 					user.setId(usuarioBusqueda.get().getId());
@@ -78,25 +77,26 @@ public class RestUsuarioController {
 					user.setPassword(encriptado.encode(obj.getDni()));
 					user.setUsername(obj.getDni());
 				}
-				user.setEnabled(true);
-				user.setAuthority(objAuthority);
-				user.setPersona(persona);
-				
 				
 				int rptaGuardar = servicePersona.guardar(persona);
-				serviceUsuario.guardar(user);
-
+				System.out.println("Registro : "+rptaGuardar);
+				
+				
 				if (rptaGuardar > 0) {
 					salida.put("mensaje", "REGISTRO EXITOSO");
 				} else {
 					salida.put("mensaje", "error en el registro");
 				}
-			} else {
+					
+				
+			}else {
 				salida.put("mensaje", "EL USUARIO YA EXISTE DNI:"+ obj.getDni());
+				
 			}
 			
-		} catch (Exception e) {
 			
+		} catch (Exception e) {
+			System.out.println("Error : " + e.getMessage());
 			e.printStackTrace();
 			salida.put("mensaje", "error en el registro "+e.getMessage());
 		}
