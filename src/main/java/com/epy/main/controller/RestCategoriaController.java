@@ -46,7 +46,6 @@ public class RestCategoriaController {
 			int guardar =0;
 			if (lista.size() ==0) {
 				guardar = serviceCategoria.guardar(cat);
-				
 				if (guardar == 1) {
 					salida.put("mensaje", "Se proceso la solicitud");
 				}else {

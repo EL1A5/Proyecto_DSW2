@@ -10,10 +10,8 @@ public class SolicitudUserDTO {
 	private String aplicacion;
 	private String tipoSolicitud;
 	private String categoria;
-
 	private String solicitud;
-	private String solucion;
-	
+	private String solucion;	
 	//Datos para consulta Av.
 	private String reg_nombres;
 	private String reg_apellidos;
