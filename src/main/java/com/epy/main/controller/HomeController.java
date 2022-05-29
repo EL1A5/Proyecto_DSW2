@@ -28,7 +28,7 @@ import com.epy.main.entity.User;
 import com.epy.main.service.AplicacionService;
 import com.epy.main.service.ICategoria;
 import com.epy.main.service.IPersona;
-import com.epy.main.service.ISolicitud;
+import com.epy.main.service.SolicitudService;
 import com.epy.main.service.ITipoSolicitud;
 import com.epy.main.service.IUser;
 
@@ -45,7 +45,7 @@ public class HomeController {
 	ICategoria serviceCategoria;
 
 	@Autowired
-	ISolicitud serviceSolicitud;
+	SolicitudService serviceSolicitud;
 
 	@Autowired
 	IUser serviceUsuario;
@@ -284,7 +284,7 @@ public class HomeController {
 		Date fecha = new Date();
 		SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		
-		serviceSolicitud.updateSolicitud(sol.getCodigo(), formato.format(fecha), sol.getSolucion());
+		serviceSolicitud.insertaActualizaSolicitud(sol.getCodigo(), formato.format(fecha), sol.getSolucion());
 		return "redirect:/repsolicitudes";
 	}
 	
