@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.epy.main.dto.CategoriaDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -54,9 +55,17 @@ public class Categoria {
 	public void setListasolicitud(List<Solicitud> listasolicitud) {
 		this.listasolicitud = listasolicitud;
 	}
+	public Categoria() {
+		
+	}
 	
 	
 	
+	
+	public Categoria (CategoriaDTO obj) {
+		this.idCategoria = obj.getIdCategoria();
+		this.descripcion = obj.getDescripcion();
+	}
 	
 	
 	

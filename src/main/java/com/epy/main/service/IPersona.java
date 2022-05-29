@@ -13,7 +13,7 @@ public interface IPersona {
 	public List<PersonaDTO> findByNombre(String nombre);
 	public List<PersonaDTO> findConsultaUsuario(int tipoUsuario, String dni);
 	public List<PersonaDTO> findConsultaUsuarioxApellido(String apellidos);
-	public List<PersonaDTO> buscarDni(String dni);
+	public List<Persona> buscarDni(String dni);
 	
 }
   

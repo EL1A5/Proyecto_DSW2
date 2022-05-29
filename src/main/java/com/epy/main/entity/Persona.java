@@ -52,8 +52,7 @@ public class Persona {
 	
 	
 	@JsonIgnore
-	//@OneToOne( mappedBy = "persona", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true )//opremal =True
-	@OneToOne( mappedBy = "persona", fetch = FetchType.LAZY, cascade =  CascadeType.PERSIST)
+	@OneToOne( mappedBy = "persona", fetch = FetchType.LAZY, cascade =  CascadeType.ALL)
 	private User user;
 	
 	

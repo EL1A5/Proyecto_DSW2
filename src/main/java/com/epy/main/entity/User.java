@@ -38,7 +38,7 @@ public class User {
 	
 	
 	@JsonBackReference
-	@OneToOne( targetEntity = Persona.class, fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+	@OneToOne( targetEntity = Persona.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name="id_persona", referencedColumnName = "id_persona")
 	private Persona persona;
 	
