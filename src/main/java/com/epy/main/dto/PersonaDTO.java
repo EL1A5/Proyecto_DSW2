@@ -10,14 +10,9 @@ public class PersonaDTO {
 	private String telefono;
 	private String tipoUsuario;
 	
-	  
-	
-	
 	public PersonaDTO() {
 		super();
 	}
-	
-	
 	
 	public PersonaDTO(int codigo, String nombre, String apellido, String documento, String celular, String telefono,
 			String tipoUsuario) {

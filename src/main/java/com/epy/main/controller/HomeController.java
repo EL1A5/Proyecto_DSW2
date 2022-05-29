@@ -27,7 +27,7 @@ import com.epy.main.entity.Solicitud;
 import com.epy.main.entity.User;
 import com.epy.main.service.AplicacionService;
 import com.epy.main.service.CategoriaService;
-import com.epy.main.service.IPersona;
+import com.epy.main.service.PersonaService;
 import com.epy.main.service.SolicitudService;
 import com.epy.main.service.ITipoSolicitud;
 import com.epy.main.service.IUser;
@@ -51,7 +51,7 @@ public class HomeController {
 	IUser serviceUsuario;
 
 	@Autowired
-	IPersona servicePersona;
+	PersonaService servicePersona;
 
 	@GetMapping({ "/", "/login" })
 	public String home() {
