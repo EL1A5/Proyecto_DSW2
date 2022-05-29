@@ -37,6 +37,7 @@ public class RestUsuarioController {
 	public ResponseEntity<List<Persona>> listadoUsuarios() {
 		return ResponseEntity.ok(servicePersona.listar());
 	}
+	//prueba
 	
 	
 	@PostMapping
