@@ -12,7 +12,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-@Entity(name="entidad_aplicacion")
+@Entity
 @Table(name="aplicacion")
 public class Aplicacion {
 	
