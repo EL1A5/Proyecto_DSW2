@@ -284,7 +284,9 @@ public class HomeController {
 		Date fecha = new Date();
 		SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		
-		serviceSolicitud.insertaActualizaSolicitud(sol.getCodigo(), formato.format(fecha), sol.getSolucion());
+		Solicitud solicitud = new Solicitud();
+		//sol.getCodigo(), formato.format(fecha), sol.getSolucion()
+		Solicitud inserto = serviceSolicitud.insertaActualizaSolicitud(solicitud);
 		return "redirect:/repsolicitudes";
 	}
 	

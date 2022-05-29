@@ -25,6 +25,7 @@ import com.epy.main.util.Constantes;
 @RequestMapping("/rest/solicitud")
 @CrossOrigin(origins = "http://localhost:4200")
 public class RestSolicitudController {
+	
 	@Autowired
 	private SolicitudServiceImpl solicitudService;
 	
