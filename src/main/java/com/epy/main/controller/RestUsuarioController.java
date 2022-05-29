@@ -38,7 +38,6 @@ public class RestUsuarioController {
 		return ResponseEntity.ok(servicePersona.listar());
 	}
 	
-	
 	@PostMapping
 	@ResponseBody
 	public  ResponseEntity<Map<String, Object>> insertaUser(@RequestBody Persona obj){
@@ -52,9 +51,7 @@ public class RestUsuarioController {
 			
 			List<Persona> listaPersona=servicePersona.buscarDni(obj.getDni());
 			
-			System.out.println("LISTA SIZE : " +listaPersona.size());
 			if (listaPersona.size()  == 0) {
-				System.out.println("INGRESA A REGISTRAR");
 				BCryptPasswordEncoder encriptado = new BCryptPasswordEncoder(4);
 				Persona persona = new Persona();
 				//persona.setIdpersona(obj.getIdpersona());
@@ -94,17 +91,12 @@ public class RestUsuarioController {
 				}
 						
 			}else {
-				salida.put("mensaje", "EL USUARIO YA EXISTE DNI:"+ obj.getDni());
-				
+				salida.put("mensaje", "EL USUARIO YA EXISTE DNI:"+ obj.getDni());	
 			}
-			
 		} catch (Exception e) {
-			System.out.println("Error : " + e.getMessage());
 			e.printStackTrace();
 			salida.put("mensaje", "error en el registro "+e.getMessage());
 		}
-		
-		 
 		return ResponseEntity.ok(salida);
 	}
 	

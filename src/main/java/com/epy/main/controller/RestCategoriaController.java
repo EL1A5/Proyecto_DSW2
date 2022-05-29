@@ -24,7 +24,7 @@ import com.epy.main.service.*;
 public class RestCategoriaController {
 	
 	@Autowired
-	private ICategoria serviceCategoria;
+	private CategoriaService serviceCategoria;
 	
 	@GetMapping
 	@ResponseBody
@@ -47,7 +47,6 @@ public class RestCategoriaController {
 				}else {
 					salida.put("mensaje", "Se produjo un inconveniente al procesar la solicitud");
 				}
-			
 			}else {
 				salida.put("mensaje", "Categoria Existe");
 			}
@@ -66,13 +65,9 @@ public class RestCategoriaController {
 	
 		try {
 			Categoria categoria = new Categoria(obj);
-			System.out.println("a");
 			Categoria cat = serviceCategoria.findByIdCategoria(obj.getIdCategoria());
-			System.out.println("b");
 			int actualizar =0;
 			if (cat != null) {
-				System.out.println("c");
-				
 				List<Categoria> lista = serviceCategoria.findByDescripcion(obj.getDescripcion());
 				if (lista.size() ==0) {
 					actualizar = serviceCategoria.guardar(categoria);
