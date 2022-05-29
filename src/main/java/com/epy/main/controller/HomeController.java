@@ -25,7 +25,7 @@ import com.epy.main.entity.Categoria;
 import com.epy.main.entity.Persona;
 import com.epy.main.entity.Solicitud;
 import com.epy.main.entity.User;
-import com.epy.main.service.IAplicacion;
+import com.epy.main.service.AplicacionService;
 import com.epy.main.service.ICategoria;
 import com.epy.main.service.IPersona;
 import com.epy.main.service.ISolicitud;
@@ -36,7 +36,7 @@ import com.epy.main.service.IUser;
 public class HomeController {
   
 	@Autowired
-	IAplicacion serviceAplicacion;
+	AplicacionService serviceAplicacion;
 
 	@Autowired
 	ITipoSolicitud serviceTipoSolicitud;
