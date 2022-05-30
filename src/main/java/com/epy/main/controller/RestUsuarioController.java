@@ -10,18 +10,22 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.epy.main.dto.PersonaDTO;
 import com.epy.main.entity.Authority;
 import com.epy.main.entity.Persona;
 import com.epy.main.entity.User;
-import com.epy.main.service.IPersona;
 import com.epy.main.service.IUser;
+import com.epy.main.service.PersonaService;
 @RestController
 @RequestMapping("/usuario")
 @CrossOrigin(origins = "http://localhost:4200")
@@ -30,7 +34,7 @@ public class RestUsuarioController {
 	@Autowired
 	private IUser serviceUsuario;
 	@Autowired
-	IPersona servicePersona;
+	PersonaService servicePersona;
 	
 	@GetMapping
 	@ResponseBody
@@ -39,8 +43,7 @@ public class RestUsuarioController {
 	}
 	//prueba
 	
-	
-	
+
 	@PostMapping
 	@ResponseBody
 	public  ResponseEntity<Map<String, Object>> insertaUser(@RequestBody Persona obj){
@@ -53,9 +56,7 @@ public class RestUsuarioController {
 			
 			List<Persona> listaPersona=servicePersona.buscarDni(obj.getDni());
 			
-			System.out.println("LISTA SIZE : " +listaPersona.size());
 			if (listaPersona.size()  == 0) {
-				System.out.println("INGRESA A REGISTRAR");
 				BCryptPasswordEncoder encriptado = new BCryptPasswordEncoder(4);
 				Persona persona = new Persona();
 				//persona.setIdpersona(obj.getIdpersona());
@@ -95,28 +96,41 @@ public class RestUsuarioController {
 				}
 						
 			}else {
-				salida.put("mensaje", "EL USUARIO YA EXISTE DNI:"+ obj.getDni());
-				
+				salida.put("mensaje", "EL USUARIO YA EXISTE DNI:"+ obj.getDni());	
 			}
-			
 		} catch (Exception e) {
-			System.out.println("Error : " + e.getMessage());
 			e.printStackTrace();
 			salida.put("mensaje", "error en el registro "+e.getMessage());
 		}
-		
-		 
 		return ResponseEntity.ok(salida);
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+	@GetMapping("/listaPersonas")
+	@ResponseBody
+	public ResponseEntity<Map<String, Object>> listaProveedorConParametros(
+			@RequestParam(name="tipoUsuario", required = true, defaultValue = "1") int tipoUsuario,
+			@RequestParam(name ="dni", required = false, defaultValue = "") String dni,
+			@RequestParam(name ="apellidos", required = false, defaultValue = "") String apellidos
+			){
+		
+		System.out.println("listaPersonas - tipoUsuario : " + tipoUsuario);
+		System.out.println("listaPersonas - dni : " + dni);
+		System.out.println("listaPersonas - apellidos : " + apellidos);
+		
+		Map<String, Object> salida = new HashMap<>();
+		try {
+			List<PersonaDTO> lista = servicePersona.busquedaPersonas(tipoUsuario,dni,"%"+apellidos+"%");
+			if (CollectionUtils.isEmpty(lista)) {
+				salida.put("mensaje", "No existen registros para mostrar." );
+			}else{
+				salida.put("lista", lista);
+				salida.put("mensaje", "Existen " + lista.size() + " registros para mostrar.");
+			}
+		}catch(Exception ex) {
+			ex.printStackTrace();
+			salida.put("mensaje", "No se registro, ocurrio un error.");
+		}
+		return ResponseEntity.ok(salida);
+	}
 }

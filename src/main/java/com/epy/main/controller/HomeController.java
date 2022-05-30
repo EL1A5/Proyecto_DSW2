@@ -25,10 +25,10 @@ import com.epy.main.entity.Categoria;
 import com.epy.main.entity.Persona;
 import com.epy.main.entity.Solicitud;
 import com.epy.main.entity.User;
-import com.epy.main.service.IAplicacion;
-import com.epy.main.service.ICategoria;
-import com.epy.main.service.IPersona;
-import com.epy.main.service.ISolicitud;
+import com.epy.main.service.AplicacionService;
+import com.epy.main.service.CategoriaService;
+import com.epy.main.service.PersonaService;
+import com.epy.main.service.SolicitudService;
 import com.epy.main.service.ITipoSolicitud;
 import com.epy.main.service.IUser;
 
@@ -36,22 +36,22 @@ import com.epy.main.service.IUser;
 public class HomeController {
   
 	@Autowired
-	IAplicacion serviceAplicacion;
+	AplicacionService serviceAplicacion;
 
 	@Autowired
 	ITipoSolicitud serviceTipoSolicitud;
 
 	@Autowired
-	ICategoria serviceCategoria;
+	CategoriaService serviceCategoria;
 
 	@Autowired
-	ISolicitud serviceSolicitud;
+	SolicitudService serviceSolicitud;
 
 	@Autowired
 	IUser serviceUsuario;
 
 	@Autowired
-	IPersona servicePersona;
+	PersonaService servicePersona;
 
 	@GetMapping({ "/", "/login" })
 	public String home() {
@@ -286,7 +286,9 @@ public class HomeController {
 		Date fecha = new Date();
 		SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		
-		serviceSolicitud.updateSolicitud(sol.getCodigo(), formato.format(fecha), sol.getSolucion());
+		Solicitud solicitud = new Solicitud();
+		//sol.getCodigo(), formato.format(fecha), sol.getSolucion()
+		Solicitud inserto = serviceSolicitud.insertaActualizaSolicitud(solicitud);
 		return "redirect:/repsolicitudes";
 	}
 	
