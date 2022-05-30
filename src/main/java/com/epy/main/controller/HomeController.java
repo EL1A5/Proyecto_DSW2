@@ -161,6 +161,8 @@ public class HomeController {
 	public String registrarPersona(@ModelAttribute Persona obj, @ModelAttribute Authority obj2) {
 		String url = "";
 
+		//hola este es una prueba
+		
 		Date date = new Date();
 		SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		Authority objAuthority = new Authority();
