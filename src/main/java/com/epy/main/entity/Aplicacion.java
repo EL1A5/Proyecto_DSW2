@@ -10,6 +10,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.epy.main.dto.AplicacionDTO;
+import com.epy.main.dto.CategoriaDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -57,7 +60,11 @@ public class Aplicacion {
 		this.listasolicitud = listasolicitud;
 	}
 	
-
+	
+	public Aplicacion (AplicacionDTO obj) {
+		this.idAplicacion = obj.getIdAplicacion();
+		this.descripcion = obj.getDescripcion();
+	}
 	
 	
 	

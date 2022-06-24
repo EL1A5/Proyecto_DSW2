@@ -19,19 +19,23 @@ import com.epy.main.entity.Categoria;
 import com.epy.main.service.*;
 
 @RestController
-@RequestMapping("/categoria")
+@RequestMapping("rest/categoria")
 @CrossOrigin(origins = "http://localhost:4200")
 public class RestCategoriaController {
 	
 	@Autowired
 	private CategoriaService serviceCategoria;
 	
+	/*http://localhost:9010/rest/categoria/*/
 	@GetMapping
 	@ResponseBody
 	public ResponseEntity<List<Categoria>> listadoUsuarios() {
 		return ResponseEntity.ok(serviceCategoria.listar());
 	}
 	
+	
+	
+	/*http://localhost:9010/rest/categoria/*/
 	@PostMapping
 	public  ResponseEntity<Map<String, Object>> insertaCategoria(@RequestBody CategoriaDTO obj){
 		Map<String, Object> salida = new HashMap<>();

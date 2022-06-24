@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.epy.main.dto.AplicacionDTO;
 import com.epy.main.entity.Aplicacion;
+import com.epy.main.entity.Categoria;
 import com.epy.main.service.AplicacionServiceImpl;
 import com.epy.main.util.Constantes;
 
@@ -27,6 +29,7 @@ public class RestAplicacionController {
 	@Autowired
 	private AplicacionServiceImpl aplicacionService;
 	
+	/*http://localhost:9010/rest/aplication/*/
 	@GetMapping
 	@ResponseBody
 	public ResponseEntity<List<Aplicacion>>listarAplicacion() {
@@ -37,11 +40,12 @@ public class RestAplicacionController {
 	/*http://localhost:9010/rest/aplication/registraAplicacion*/
 	@PostMapping("/registraAplicacion")
 	@ResponseBody 
-	public ResponseEntity<Map<String, Object>> registrarAplicacion(@RequestBody Aplicacion objAplicacion) {
+	public ResponseEntity<Map<String, Object>> registrarAplicacion(@RequestBody AplicacionDTO objAplicacion) {
 		Map<String, Object> salida = new HashMap<>();
 		try {
-			objAplicacion.setIdAplicacion(0);
-			Aplicacion objSalida = aplicacionService.insertaActualizaAplicacion(objAplicacion);
+			Aplicacion aplicacion = new Aplicacion(objAplicacion);
+			
+			Aplicacion objSalida = aplicacionService.insertaActualizaAplicacion(aplicacion);
 			if (objSalida == null) {
 				salida.put("mensaje", Constantes.MENSAJE_REG_ERROR);
 			} else {
@@ -57,10 +61,11 @@ public class RestAplicacionController {
 	/*http://localhost:9010/rest/aplication/actualizaAplicacion*/
 	@PutMapping("/actualizaAplicacion")
 	@ResponseBody
-	public ResponseEntity<Map<String, Object>> actualizaAplicacion(@RequestBody Aplicacion objAplicacion) {
+	public ResponseEntity<Map<String, Object>> actualizaAplicacion(@RequestBody AplicacionDTO objAplicacion) {
 		Map<String, Object> salida = new HashMap<>();
 		try {
-			Aplicacion objSalida =  aplicacionService.insertaActualizaAplicacion(objAplicacion);
+			Aplicacion aplicacion = new Aplicacion(objAplicacion);
+			Aplicacion objSalida =  aplicacionService.insertaActualizaAplicacion(aplicacion);
 			if (objSalida == null) {
 				salida.put("mensaje", Constantes.MENSAJE_ACT_ERROR);
 			} else {
