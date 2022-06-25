@@ -15,7 +15,7 @@ import com.epy.main.entity.Solicitud;
 public interface SolicitudRepository extends JpaRepository<Solicitud, Integer> {
 	
 	 
-	@Query(
+	/*@Query(
 			value = "select new com.epy.main.dto.SolicitudUserDTO"
 					+ "(sol.idSolicitud, sol.estado, sol.fechaRegistro, sol.fechaCierre, "
 					+ "sol.prioridad, app.descripcion,tip.descripcion, cat.descripcion) "
@@ -26,9 +26,9 @@ public interface SolicitudRepository extends JpaRepository<Solicitud, Integer> {
 					+ " sol.fechaRegistro between ?3 and ?4 and app.idAplicacion=?5 "
 			)
 	public List<SolicitudUserDTO> fetchSolicitudUserDTODataInnerJoin(int persona, String estado, 
-			String fechaInicio, String fechaFin, int aplicativo);
+			String fechaInicio, String fechaFin, int aplicativo);*/
 	
-	@Query(
+	/*@Query(
 			value = "select new com.epy.main.dto.SolicitudUserDTO"
 					+ "(sol.idSolicitud, sol.estado, sol.fechaRegistro, sol.fechaCierre, "
 					+ "sol.prioridad, app.descripcion,tip.descripcion, cat.descripcion,sol.descripcionSolicitud, "
@@ -40,10 +40,10 @@ public interface SolicitudRepository extends JpaRepository<Solicitud, Integer> {
 					+ " sol.fechaRegistro between ?2 and ?3"
 			)
 	public List<SolicitudUserDTO> fetchSolicitudDTODataInnerJoin( String estado, 
-			String fechaInicio, String fechaFin);
+			String fechaInicio, String fechaFin);*/
 	
 	
-	@Query(
+	/*@Query(
 			value = "select new com.epy.main.dto.SolicitudUserDTO"
 					+ "(sol.idSolicitud, sol.estado, sol.fechaRegistro, sol.fechaCierre, "
 					+ "sol.prioridad, app.descripcion,tip.descripcion, cat.descripcion,sol.descripcionSolicitud, sol.descripcionAtencion ) "
@@ -52,21 +52,26 @@ public interface SolicitudRepository extends JpaRepository<Solicitud, Integer> {
 					+ " inner join sol.categoria cat"
 					+ " inner join sol.persona per where sol.idSolicitud=?1 "
 			)
-	public SolicitudUserDTO fetchSolicitudDetallexIDDTODataInnerJoin(int codigoSolicitud);
+	public SolicitudUserDTO fetchSolicitudDetallexIDDTODataInnerJoin(int codigoSolicitud);*/
 	
 	
 	
 	
-	@Transactional
+	/*@Transactional
 	@Modifying
 	@Query(
 			value = "update entity_solicitud sol"
 					+ " set sol.fechaCierre=?2 , sol.descripcionAtencion=?3, sol.estado='Atendido'"
 					+ " where sol.idSolicitud=?1 "
 			)
-	public int updateSolicitud(int codigo, String fecha, String solucion);
+	public int updateSolicitud(int codigo, String fecha, String solucion);*/
+
 	
+    @Query("SELECT r FROM Solicitud r JOIN Aplicacion v ON v.id_aplicacion = r.id_aplicacion " +
+            "WHERE (?1 is '' or r.estado LIKE ?1) and (?2 is -1 or v.id_aplicacion = ?2) and (?3 is '' or r.fechaRegistro LIKE ?3)")
+	public List<Solicitud> listaSolicitudPorEstadoAplicativoFecha(String estado, int id_aplicacion, String fechaRegistro);
 	
+    
 	
 
 }

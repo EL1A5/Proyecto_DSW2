@@ -16,5 +16,13 @@ public class Constantes {
 	public static final String MENSAJE_ELI_NO_EXISTE_ID = "No existe el ID que se desea eliminar.";
 	
 	public static final String MENSAJE_DNI_YA_EXISTE = "Ya existe dicho el DNI : ";
+	
+	public static final String MENSAJE_LOGIN_NOVALIDO = "Usuario y/o contraseña incorrecto";
+	public static final String MENSAJE_LOGIN_ERROR = "Error de ingreso al sistema";
+	public static final String MENSAJE_LOGIN_EXITO = "";
+	public static final String MENSAJE_CONSULTA_ERROR = "No se encontro ningun registro";
+	
+	public static final String MENSAJE_VISITA_DUPLICADO = "No puede registrar la visita de una persona que aún no sale.";
+	public static final String MENSAJE_BOLETA_PENDIENTES = "No puede registrar nuevas boletas porque aun tiene pendientes por pagar.";
 
 }
