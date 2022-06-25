@@ -112,7 +112,7 @@ public class HomeController {
 		return "/core/registroSolicitud";
 	}
 
-	@PostMapping("/registrarAtencion")
+	/*@PostMapping("/registrarAtencion")
 	public String registrarAtencion(@ModelAttribute Solicitud objSolicitud) {
 		SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 		Date date = new Date();
@@ -131,7 +131,7 @@ public class HomeController {
 		solicitud.setPersona(usuario.get().getPersona());
 		serviceSolicitud.guardar(solicitud);
 		return "redirect:/regsolicitudes?success=true";
-	}
+	}*/
 
 	@PostMapping("/configAplicacionRegistrar")
 	public String registrarAplicacion(@ModelAttribute Aplicacion objAplicacion) {
@@ -228,7 +228,7 @@ public class HomeController {
 		return url;
 	}
 
-	@PostMapping("/missolicitudes")
+	/*@PostMapping("/missolicitudes")
 	public String consultar_misSolicitudes(HttpServletRequest request, Model model) {
 		String url = "principal";
 
@@ -250,18 +250,18 @@ public class HomeController {
 				estado, fechaInicio, fechaFin, aplicativo));
 
 		return url;
-	}
+	}*/
 	
 	
 	
-	@GetMapping("/verSolicitud/{codigo}")
+	/*@GetMapping("/verSolicitud/{codigo}")
 	public String verSolicitud(@PathVariable int codigo, Model model) {
 		SolicitudUserDTO objSol  = serviceSolicitud.fetchSolicitudDetallexIDDTODataInnerJoin(codigo);
 		model.addAttribute("solicitud", objSol);
 		return "detalle";
-	}
+	}*/
 	
-	@PostMapping("/consultarSolicitudes")
+	/*@PostMapping("/consultarSolicitudes")
 	public String consultar_Solicitudes(HttpServletRequest request, Model model) {
 
 		String estado = request.getParameter("cboEstado");
@@ -274,14 +274,14 @@ public class HomeController {
 		model.addAttribute("listaSolicitudes", serviceSolicitud.fetchSolicitudDTODataInnerJoin(estado, fechaInicio, fechaFin));
 
 		return "/reportes/consultaSolicitudes";
-	}
+	}*/
 	
-	@GetMapping("/verSolicitudDetalle/{codigo}")
+	/*@GetMapping("/verSolicitudDetalle/{codigo}")
 	public String verSolicitudDetalle(@PathVariable int codigo, Model model) {
 		SolicitudUserDTO objSol  = serviceSolicitud.fetchSolicitudDetallexIDDTODataInnerJoin(codigo);
 		model.addAttribute("solicitud", objSol);
 		return "detalleOperador";
-	}
+	}*/
 	
 	
 	@PostMapping("/solicitudActualizar")
