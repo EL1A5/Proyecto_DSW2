@@ -24,8 +24,8 @@ import com.epy.main.dto.PersonaDTO;
 import com.epy.main.entity.Authority;
 import com.epy.main.entity.Persona;
 import com.epy.main.entity.User;
-import com.epy.main.service.PersonaService;
 import com.epy.main.service.IUser;
+import com.epy.main.service.PersonaService;
 @RestController
 @RequestMapping("/usuario")
 @CrossOrigin(origins = "http://localhost:4200")
@@ -43,14 +43,14 @@ public class RestUsuarioController {
 	}
 	//prueba
 	
+
 	@PostMapping
 	@ResponseBody
 	public  ResponseEntity<Map<String, Object>> insertaUser(@RequestBody Persona obj){
 		Map<String, Object> salida = new HashMap<>();
+		
 		try {
-			System.out.println(obj.getIdpersona());
-			System.out.println(obj.getDni());
-			System.out.println(obj.getApellidos());
+		
 			Date date = new Date();
 			SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");	
 			
@@ -105,6 +105,7 @@ public class RestUsuarioController {
 		return ResponseEntity.ok(salida);
 	}
 	
+
 	@GetMapping("/listaPersonas")
 	@ResponseBody
 	public ResponseEntity<Map<String, Object>> listaProveedorConParametros(

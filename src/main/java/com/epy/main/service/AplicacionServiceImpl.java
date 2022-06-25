@@ -29,7 +29,14 @@ public class AplicacionServiceImpl implements AplicacionService {
 	@Override
 	public int guardar(Aplicacion aplicacion) {
 		// TODO Auto-generated method stub
-		return 0;
+		int res=0;
+		Aplicacion obj = aplicacionRepository.save(aplicacion);
+
+		if (!obj.equals(null)) {
+			res=1;
+		}
+
+		return res;
 	}
 
 
@@ -37,6 +44,20 @@ public class AplicacionServiceImpl implements AplicacionService {
 	public Aplicacion insertaActualizaAplicacion(Aplicacion aplicacion) {
 
 		return aplicacionRepository.save(aplicacion);
+	}
+
+
+	@Override
+	public List<Aplicacion> findByDescripcion(String descripcion) {
+		// TODO Auto-generated method stub
+		return aplicacionRepository.findByDescripcion(descripcion);
+	}
+
+
+	@Override
+	public Aplicacion findByIdAplicacion(int idCategoria) {
+		// TODO Auto-generated method stub
+		return aplicacionRepository.findByIdAplicacion(idCategoria);
 	}
 	
 	

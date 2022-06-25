@@ -136,10 +136,13 @@ public class HomeController {
 	@PostMapping("/configAplicacionRegistrar")
 	public String registrarAplicacion(@ModelAttribute Aplicacion objAplicacion) {
 		String url = "";
+		System.out.println("ENTRA "+objAplicacion.getIdAplicacion() +" : "+ objAplicacion.getDescripcion());
 		int insertar = serviceAplicacion.guardar(objAplicacion);
 		if (insertar > 0) {
+			System.out.println("ENTRA AQUI");
 			url = "redirect:/configaplicacion?success=true";
 		} else {
+			System.out.println("ENTRA ALLI");
 			url = "redirect:/configaplicacion?success=false";
 		}
 		return url;
@@ -285,10 +288,8 @@ public class HomeController {
 	public String solicitud_actualizar(@ModelAttribute SolicitudUserDTO sol ) {
 		Date fecha = new Date();
 		SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		
-		Solicitud solicitud = new Solicitud();
-		//sol.getCodigo(), formato.format(fecha), sol.getSolucion()
-		Solicitud inserto = serviceSolicitud.insertaActualizaSolicitud(solicitud);
+
+		serviceSolicitud.updateSolicitud(sol.getCodigo(), formato.format(fecha), sol.getSolucion());
 		return "redirect:/repsolicitudes";
 	}
 	

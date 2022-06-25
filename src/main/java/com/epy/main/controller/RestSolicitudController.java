@@ -58,7 +58,9 @@ public class RestSolicitudController {
 		return ResponseEntity.ok(salida);
 	}
 	
+
 	// http://localhost:9010/rest/solicitud/actualizaSolicitud
+
 	@PutMapping("/actualizaSolicitud")
 	@ResponseBody
 	public ResponseEntity<Map<String, Object>> actualizaSolicitud(@RequestBody Solicitud obj) {
