@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.epy.main.dto.AplicacionDTO;
 import com.epy.main.entity.Aplicacion;
-import com.epy.main.entity.Categoria;
 import com.epy.main.service.AplicacionServiceImpl;
 import com.epy.main.util.Constantes;
 
@@ -77,6 +76,8 @@ public class RestAplicacionController {
 		}
 		return ResponseEntity.ok(salida);
 	}
+	
+	
 	
 	
 	

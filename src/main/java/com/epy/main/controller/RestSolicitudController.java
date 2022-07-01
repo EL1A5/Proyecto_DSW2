@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.epy.main.entity.Aplicacion;
 import com.epy.main.entity.Solicitud;
+import com.epy.main.service.SolicitudService;
 import com.epy.main.service.SolicitudServiceImpl;
 import com.epy.main.util.Constantes;
 
@@ -28,7 +29,7 @@ import com.epy.main.util.Constantes;
 public class RestSolicitudController {
 	
 	@Autowired
-	private SolicitudServiceImpl solicitudService;
+	private SolicitudService solicitudService;
 	
 	@GetMapping
 	@ResponseBody
@@ -79,31 +80,8 @@ public class RestSolicitudController {
 		return ResponseEntity.ok(salida);
 	}
 	
-	// http://localhost:9010/rest/solicitud/listaSolicitudConParametros
-	 @GetMapping("/listaSolicitudConParametros")
-		@ResponseBody
-		public ResponseEntity<Map<String, Object>> listaSolicitudPorEstadoAplicativoFecha(
 
-				@RequestParam(name = "estado", required = false, defaultValue = "") String estado,
-				@RequestParam(name = "aplicativo", required = false, defaultValue = "-1") int id_aplicacion,
-				@RequestParam(name = "fechaRegistro", required = false, defaultValue = "") String fechaRegistro
-		) {
-			Map<String, Object> salida = new HashMap<>();
-			
-			try {
-				List<Solicitud> lista = solicitudService.listaSolicitudPorEstadoAplicativoFecha("%"+estado+"%", id_aplicacion,fechaRegistro);
-				if (CollectionUtils.isEmpty(lista)) {
-					salida.put("mensaje", "No existen datos para mostrar");
-				}else {
-					salida.put("lista", lista);
-					salida.put("mensaje", "Existen " + lista.size() + " elementos para mostrar");
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-				salida.put("mensaje", com.epy.main.util.Constantes.MENSAJE_CONSULTA_ERROR);
-			}
-			return ResponseEntity.ok(salida);
-		}
+	
 	
 	
 

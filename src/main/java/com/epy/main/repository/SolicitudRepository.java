@@ -66,10 +66,7 @@ public interface SolicitudRepository extends JpaRepository<Solicitud, Integer> {
 			)
 	public int updateSolicitud(int codigo, String fecha, String solucion);*/
 
-	
-    @Query("SELECT r FROM Solicitud r JOIN Aplicacion v ON v.id_aplicacion = r.id_aplicacion " +
-            "WHERE (?1 is '' or r.estado LIKE ?1) and (?2 is -1 or v.id_aplicacion = ?2) and (?3 is '' or r.fechaRegistro LIKE ?3)")
-	public List<Solicitud> listaSolicitudPorEstadoAplicativoFecha(String estado, int id_aplicacion, String fechaRegistro);
+
 	
     
 	
