@@ -16,5 +16,8 @@ public interface PersonaService {
 	public List<Persona> buscarDni(String dni);
 	public List<PersonaDTO> busquedaPersonas(int tipoUsuario, String dni, String apellidos);
 	public List<PersonaDTO> listadoPersona();
+	
+	public List<PersonaDTO> buscarxDocumento(String documento);
+	
 }
   

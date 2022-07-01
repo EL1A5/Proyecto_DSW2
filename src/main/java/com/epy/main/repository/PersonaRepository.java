@@ -54,7 +54,12 @@ public interface PersonaRepository extends JpaRepository<Persona, Integer> {
 	public List<PersonaDTO> listadoPersona();
 	
 	
-	
+	@Query(
+			value = "select new com.epy.main.dto.PersonaDTO"
+					+ "(per.idpersona, per.nombre, per.apellidos, per.dni, per.celular, per.telefono, per.dni) "
+					+ "from entidad_persona per where per.dni=?1 "
+			)
+	public List<PersonaDTO> buscarxDocumento(String documento);
 	
 	
 }

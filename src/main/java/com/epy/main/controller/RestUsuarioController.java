@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.epy.main.dto.AutenticacionDTO;
 import com.epy.main.dto.AutenticacionResponseDTO;
 import com.epy.main.dto.PersonaDTO;
+import com.epy.main.dto.RptaServerDTO;
 import com.epy.main.dto.UsuarioDTO;
 import com.epy.main.entity.Authority;
 import com.epy.main.entity.Persona;
@@ -45,6 +46,8 @@ public class RestUsuarioController {
 		return ResponseEntity.ok(servicePersona.listadoPersona());
 	}
 
+	
+	/*
 	@PostMapping
 	@ResponseBody
 	public  ResponseEntity<Map<String, Object>> insertaUser(@RequestBody Persona obj){
@@ -102,7 +105,7 @@ public class RestUsuarioController {
 		}
 		return ResponseEntity.ok(salida);
 	}
-	
+	*/
 
 	@GetMapping("/listaPersonas")
 	@ResponseBody
@@ -147,8 +150,127 @@ public class RestUsuarioController {
 			objRpta.setCodigo("0");
 			objRpta.setMensaje("Login Incorrecto");
 		}
-	
 		return ResponseEntity.ok(objRpta);
+	}
+	
+	
+	
+	@PostMapping
+	@ResponseBody
+	public  ResponseEntity<RptaServerDTO> insertaUser(@RequestBody PersonaDTO obj){
+		RptaServerDTO rpta = new RptaServerDTO();
+		
+		System.out.println("insertaUser -codigo : " + obj.getCodigo());
+		System.out.println("insertaUser -nombre : " + obj.getNombre());
+		System.out.println("insertaUser -apellido : " + obj.getApellido());
+		System.out.println("insertaUser -documento : " + obj.getDocumento());
+		System.out.println("insertaUser -tipoUsuario : " + obj.getTipoUsuario());
+		
+		try {
+			
+			Date date = new Date();
+			SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");	
+			List<Persona> listaPersona=servicePersona.buscarDni(obj.getDocumento());
+			
+			if (listaPersona.size()  == 0) {
+				Persona persona = new Persona();
+				//persona.setIdpersona(obj.getIdpersona());
+				persona.setNombre(obj.getNombre());
+				persona.setApellidos(obj.getApellido());
+				persona.setDni(obj.getDocumento());
+				persona.setCelular(obj.getCelular());
+				persona.setTelefono(obj.getTelefono());
+				persona.setFechaRegistro(formato.format(date));
+				
+				Optional<User> usuarioBusqueda = serviceUsuario.buscarUsuario(obj.getDocumento());
+				
+				User user = new User();
+				if (usuarioBusqueda.isPresent()) {
+					user.setId(usuarioBusqueda.get().getId());
+					user.setPassword(usuarioBusqueda.get().getPassword());
+					user.setUsername(usuarioBusqueda.get().getPersona().getDni());
+				} else {
+					user.setPassword(obj.getDocumento());
+					user.setUsername(obj.getDocumento());
+				}
+				
+				Authority objAuthority = new Authority();
+				objAuthority.setId(Integer.parseInt(obj.getTipoUsuario()));//objAuthority.setId(1);
+				user.setEnabled(true);
+				user.setAuthority(objAuthority);
+				user.setPersona(persona);
+				persona.setUser(user);
+				
+				int rptaGuardar = servicePersona.guardar(persona);
+				serviceUsuario.guardar(user);
+
+				if (rptaGuardar > 0) {
+					rpta.setCodigo(1);
+					rpta.setMensaje("REGISTRO EXITOSO");
+				} else {
+					rpta.setCodigo(2);
+					rpta.setMensaje("NO SE REGISTRO");
+				}
+			}else {
+				rpta.setCodigo(3);
+				rpta.setMensaje("EL USUARIO YA EXISTE DNI:"+ obj.getDocumento());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			rpta.setCodigo(-1);
+			rpta.setMensaje("Error");
+		}
+		
+		System.out.println(rpta.getCodigo());
+		System.out.println(rpta.getMensaje());
+		return ResponseEntity.ok(rpta);
+	}
+	
+	
+	@PostMapping("/actualizarUsuario")
+	@ResponseBody
+	public  ResponseEntity<RptaServerDTO> actualizarUsuario(@RequestBody PersonaDTO obj){
+		RptaServerDTO rpta = new RptaServerDTO();
+		
+		System.out.println("insertaUser -codigo : " + obj.getCodigo());
+		System.out.println("insertaUser -nombre : " + obj.getNombre());
+		System.out.println("insertaUser -apellido : " + obj.getApellido());
+		System.out.println("insertaUser -documento : " + obj.getDocumento());
+		System.out.println("insertaUser -celular : " + obj.getCelular());
+		System.out.println("insertaUser -telefono : " + obj.getTelefono());
+		System.out.println("insertaUser -tipoUsuario : " + obj.getTipoUsuario());
+		
+		try {
+			List<PersonaDTO> listaPersona=servicePersona.buscarxDocumento(obj.getDocumento());
+			if (listaPersona.size() > 0) {
+				System.out.println("Nombre : " + listaPersona.get(0).getNombre());
+				Persona persona = new Persona();
+				persona.setIdpersona(obj.getCodigo());
+				persona.setNombre(obj.getNombre());
+				persona.setApellidos(obj.getApellido());
+				persona.setDni(obj.getDocumento());
+				persona.setCelular(obj.getCelular());
+				persona.setTelefono(obj.getTelefono());
+				int rptaGuardar = servicePersona.guardar(persona);
+				if (rptaGuardar > 0) {
+					rpta.setCodigo(1);
+					rpta.setMensaje("ACTUALIZACION EXITOSO");
+				} else {
+					rpta.setCodigo(2);
+					rpta.setMensaje("NO SE ACTUALIZO");
+				}
+			}else {
+				rpta.setCodigo(3);
+				rpta.setMensaje("EL USUARIO NO EXISTE : "+ obj.getDocumento());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			rpta.setCodigo(-1);
+			rpta.setMensaje("Error");
+		}
+		System.out.println(rpta.getCodigo());
+		System.out.println(rpta.getMensaje());
+		return ResponseEntity.ok(rpta);
 	}
 	
 

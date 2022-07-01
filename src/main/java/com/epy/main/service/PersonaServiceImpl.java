@@ -64,6 +64,11 @@ public class PersonaServiceImpl implements PersonaService {
 		return personaRepository.listadoPersona();
 	}
 
+	@Override
+	public List<PersonaDTO> buscarxDocumento(String documento) {
+		return personaRepository.buscarxDocumento(documento);
+	}
+
 	
 	
 	
