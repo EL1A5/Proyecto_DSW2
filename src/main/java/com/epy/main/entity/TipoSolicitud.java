@@ -27,7 +27,7 @@ public class TipoSolicitud {
 	@Column(name="descripcion")
 	private String descripcion;
 	 
-
+	
 	@OneToMany(mappedBy = "tipoSolicitud", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Solicitud> listaSolicitud;
 
