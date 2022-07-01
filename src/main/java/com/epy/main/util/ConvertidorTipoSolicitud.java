@@ -20,6 +20,7 @@ public class ConvertidorTipoSolicitud{
 			lstPokemonModel.add(new TipoSolicitudDTO(pokemon));
 		}
 		
+		
 		return lstPokemonModel;
 	}
 	
