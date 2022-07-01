@@ -80,6 +80,12 @@ public class RestSolicitudController {
 		return ResponseEntity.ok(salida);
 	}
 	
+	
+	
+	
+	
+	
+	
 
 	
 	
