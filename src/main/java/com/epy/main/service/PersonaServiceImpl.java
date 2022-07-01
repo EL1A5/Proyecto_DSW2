@@ -59,6 +59,11 @@ public class PersonaServiceImpl implements PersonaService {
 		return personaRepository.busquedaPersonas(tipoUsuario, dni, apellidos);
 	}
 
+	@Override
+	public List<PersonaDTO> listadoPersona() {
+		return personaRepository.listadoPersona();
+	}
+
 	
 	
 	

@@ -41,8 +41,8 @@ public class RestUsuarioController {
 	
 	@GetMapping
 	@ResponseBody
-	public ResponseEntity<List<Persona>> listadoUsuarios() {
-		return ResponseEntity.ok(servicePersona.listar());
+	public ResponseEntity<List<PersonaDTO>> listadoUsuarios() {
+		return ResponseEntity.ok(servicePersona.listadoPersona());
 	}
 
 	@PostMapping

@@ -44,6 +44,9 @@ public class Persona {
 	@Column
 	private String telefono;
 	
+	@NotNull
+	@Column
+	private String tipoUsuario;
 	
 	@NotNull
 	@Column(name="fecha_registro")
