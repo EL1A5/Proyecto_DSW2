@@ -6,18 +6,18 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.epy.main.dto.UsuarioDTO;
 import com.epy.main.entity.User;
 import com.epy.main.repository.UserRepository;
 
 @Service
-public class UserServiceImpl implements IUser {
+public class UserServiceImpl implements UserService {
 	
 	@Autowired
 	UserRepository userRepository;
 
 	@Override
 	public List<User> listar() {
-		
 		return (List<User>)userRepository.findAll();
 	}
 
@@ -34,6 +34,12 @@ public class UserServiceImpl implements IUser {
 			res=1;
 		}
 		return res;
+	}
+
+	@Override
+	public UsuarioDTO findByUsernameAndPassword(String usuario, String password) {
+		UsuarioDTO objUser = userRepository.findByUsernameAndPassword(usuario, password);
+		return objUser;
 	}
 
 }

@@ -15,7 +15,7 @@ import com.epy.main.dto.AplicacionDTO;
 import com.epy.main.dto.CategoriaDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-@Entity
+@Entity( name="entity_aplicacion")
 @Table(name="aplicacion")
 public class Aplicacion {
 	

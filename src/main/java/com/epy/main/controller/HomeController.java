@@ -30,11 +30,12 @@ import com.epy.main.service.CategoriaService;
 import com.epy.main.service.PersonaService;
 import com.epy.main.service.SolicitudService;
 import com.epy.main.service.ITipoSolicitud;
-import com.epy.main.service.IUser;
+import com.epy.main.service.UserService;
 
 @Controller
 public class HomeController {
   
+	/*
 	@Autowired
 	AplicacionService serviceAplicacion;
 
@@ -132,6 +133,9 @@ public class HomeController {
 		serviceSolicitud.guardar(solicitud);
 		return "redirect:/regsolicitudes?success=true";
 	}*/
+	
+	
+	/*
 
 	@PostMapping("/configAplicacionRegistrar")
 	public String registrarAplicacion(@ModelAttribute Aplicacion objAplicacion) {
@@ -283,7 +287,7 @@ public class HomeController {
 		return "detalleOperador";
 	}*/
 	
-	
+	/*
 	@PostMapping("/solicitudActualizar")
 	public String solicitud_actualizar(@ModelAttribute SolicitudUserDTO sol ) {
 		Date fecha = new Date();
@@ -292,7 +296,7 @@ public class HomeController {
 		serviceSolicitud.updateSolicitud(sol.getCodigo(), formato.format(fecha), sol.getSolucion());
 		return "redirect:/repsolicitudes";
 	}
-	
+	*/
 	
 	
 	

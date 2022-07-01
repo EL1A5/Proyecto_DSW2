@@ -20,11 +20,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.epy.main.dto.AutenticacionDTO;
+import com.epy.main.dto.AutenticacionResponseDTO;
 import com.epy.main.dto.PersonaDTO;
+import com.epy.main.dto.UsuarioDTO;
 import com.epy.main.entity.Authority;
 import com.epy.main.entity.Persona;
 import com.epy.main.entity.User;
-import com.epy.main.service.IUser;
+import com.epy.main.service.UserService;
 import com.epy.main.service.PersonaService;
 @RestController
 @RequestMapping("/usuario")
@@ -32,7 +35,7 @@ import com.epy.main.service.PersonaService;
 public class RestUsuarioController {
 	
 	@Autowired
-	private IUser serviceUsuario;
+	private UserService serviceUsuario;
 	@Autowired
 	PersonaService servicePersona;
 	
@@ -41,8 +44,6 @@ public class RestUsuarioController {
 	public ResponseEntity<List<Persona>> listadoUsuarios() {
 		return ResponseEntity.ok(servicePersona.listar());
 	}
-	//prueba
-	
 
 	@PostMapping
 	@ResponseBody
@@ -50,14 +51,11 @@ public class RestUsuarioController {
 		Map<String, Object> salida = new HashMap<>();
 		
 		try {
-		
 			Date date = new Date();
 			SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");	
-			
 			List<Persona> listaPersona=servicePersona.buscarDni(obj.getDni());
 			
 			if (listaPersona.size()  == 0) {
-				BCryptPasswordEncoder encriptado = new BCryptPasswordEncoder(4);
 				Persona persona = new Persona();
 				//persona.setIdpersona(obj.getIdpersona());
 				persona.setNombre(obj.getNombre());
@@ -75,7 +73,7 @@ public class RestUsuarioController {
 					user.setPassword(usuarioBusqueda.get().getPassword());
 					user.setUsername(usuarioBusqueda.get().getPersona().getDni());
 				} else {
-					user.setPassword(encriptado.encode(obj.getDni()));
+					user.setPassword(obj.getDni());
 					user.setUsername(obj.getDni());
 				}
 				
@@ -133,4 +131,31 @@ public class RestUsuarioController {
 		}
 		return ResponseEntity.ok(salida);
 	}
+
+	@PostMapping("/autenticarUsuario")
+	public ResponseEntity<AutenticacionResponseDTO> getValidarUsuario(@RequestBody AutenticacionDTO obj){
+		System.out.println("api-autenticar-Usuario : " + obj.getUsername());
+		System.out.println("api-autenticar-Clave : " + obj.getPassword());
+		AutenticacionResponseDTO objRpta = new AutenticacionResponseDTO();
+		System.out.println("Contra: " + obj.getPassword());
+		UsuarioDTO usuario = serviceUsuario.findByUsernameAndPassword(obj.getUsername(), obj.getPassword());
+		
+		if (usuario != null) {
+			objRpta.setCodigo("1");
+			objRpta.setMensaje("Login Correcto");
+		}else {
+			objRpta.setCodigo("0");
+			objRpta.setMensaje("Login Incorrecto");
+		}
+	
+		return ResponseEntity.ok(objRpta);
+	}
+	
+
+	
+	
+	
+	
+	
+
 }

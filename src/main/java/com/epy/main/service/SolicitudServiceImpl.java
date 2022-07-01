@@ -62,9 +62,7 @@ public class SolicitudServiceImpl implements SolicitudService {
 		return solicitudRepository.save(solicitud);
 	}
 
-	public List<Solicitud> listaSolicitudPorEstadoAplicativoFecha(String string, int id_aplicacion, String fechaRegistro) {
-		return solicitudRepository.listaSolicitudPorEstadoAplicativoFecha(string, id_aplicacion, fechaRegistro);
-	}
+
 	
 
 }
