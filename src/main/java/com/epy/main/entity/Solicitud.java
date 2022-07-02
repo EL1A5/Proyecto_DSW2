@@ -11,7 +11,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.epy.main.dto.SolicitudDTO;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity(name="entity_solicitud")
 @Table(name="solicitud")
@@ -22,7 +24,7 @@ public class Solicitud {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id_solicitud")
 	private int idSolicitud;
-	  
+
 	@JsonBackReference
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JoinColumn(name="id_tipo_solicitud")
@@ -30,12 +32,12 @@ public class Solicitud {
 	
 	@Column(name="descripcion_solicitud")
 	private String descripcionSolicitud;
-	
-	@JsonBackReference
+
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY,  cascade = CascadeType.MERGE)
 	@JoinColumn(name="id_aplicacion")
 	private Aplicacion aplicacion;
-	
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY,  cascade = CascadeType.MERGE)
 	@JoinColumn(name="id_categoria")
 	private Categoria categoria;
@@ -55,10 +57,15 @@ public class Solicitud {
 	@Column(name="descripcion_atencion")
 	private String descripcionAtencion;
 	
-	@JsonBackReference
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JoinColumn(name="id_persona")
 	private Persona persona;
+
+	public Solicitud() {
+
+	}
+
 
 	public int getIdSolicitud() {
 		return idSolicitud;
@@ -147,11 +154,22 @@ public class Solicitud {
 	public void setPersona(Persona persona) {
 		this.persona = persona;
 	}
-	
-	
-	
-	
-	
-	
-	
+
+
+	public Solicitud(SolicitudDTO obj) {
+		this.idSolicitud = obj.getId_solicitud();
+		this.tipoSolicitud = obj.getTipoSolicitud();
+		this.descripcionSolicitud = obj.getDes_solicitud();
+		this.aplicacion = obj.getAplicacion();
+		this.categoria = obj.getCategoria();
+		this.prioridad = obj.getPrioridad();
+		this.fechaRegistro = obj.getFec_reg();
+		this.fechaCierre = obj.getFec_cierre();
+		this.estado = obj.getEstado();
+		this.descripcionAtencion = obj.getDes_atencion();
+		this.persona = obj.getPersona();
+
+	}
+
+
 }

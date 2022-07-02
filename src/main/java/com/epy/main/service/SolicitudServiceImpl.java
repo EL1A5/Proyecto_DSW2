@@ -15,11 +15,11 @@ public class SolicitudServiceImpl implements SolicitudService {
 	@Autowired
 	SolicitudRepository solicitudRepository;
 	
-	/*@Override
-	public List<SolicitudUserDTO> listarSolicitudesxUsuario(int persona, String estado, String fechaInicio, String fechaFin,
-			int aplicativo) {
+	@Override
+	public List<SolicitudUserDTO> listarSolicitudesxUsuario(int persona, String estado, String fechaInicio,
+															String fechaFin, int aplicativo) {
 		return solicitudRepository.fetchSolicitudUserDTODataInnerJoin(persona, estado, fechaInicio, fechaFin, aplicativo);
-	}  */
+	}
 
 	/*@Override
 	public SolicitudUserDTO fetchSolicitudDetallexIDDTODataInnerJoin(int codigoSolicitud) {
@@ -47,7 +47,7 @@ public class SolicitudServiceImpl implements SolicitudService {
 		return solicitudRepository.findAll();
 	}
 
-	/*@Override
+	@Override
 	public int guardar(Solicitud solicitud) {
 		int inserto =0;
 		Solicitud sol= solicitudRepository.save(solicitud);
@@ -55,12 +55,16 @@ public class SolicitudServiceImpl implements SolicitudService {
 			inserto =1;
 		}
 		return inserto; 
-	}*/
+	}
 
 	@Override
 	public Solicitud insertaActualizaSolicitud(Solicitud solicitud) {
 		return solicitudRepository.save(solicitud);
 	}
+
+	/*public List<Solicitud> listaSolicitudPorEstadoAplicativoFecha(String string, int id_aplicacion, String fechaRegistro) {
+		return solicitudRepository.listaSolicitudPorEstadoAplicativoFecha(string, id_aplicacion, fechaRegistro);
+	}*/
 
 
 	

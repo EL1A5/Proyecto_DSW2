@@ -12,8 +12,8 @@ public interface SolicitudService {
 	
 	//public int updateSolicitud(int codigo, String fecha, String solucion);
 	
-	/*public List<SolicitudUserDTO> listarSolicitudesxUsuario(int persona, String estado, String fechaInicio, String fechaFin,
-			int aplicativo);*/
+	public List<SolicitudUserDTO> listarSolicitudesxUsuario(int persona, String estado, String fechaInicio,
+															String fechaFin, int aplicativo);
 	
 	//public SolicitudUserDTO fetchSolicitudDetallexIDDTODataInnerJoin(int codigoSolicitud);
 	
@@ -21,9 +21,11 @@ public interface SolicitudService {
 	
 	public List<Solicitud> listar();
 	
-	//public int guardar(Solicitud solicitud);
+	public int guardar(Solicitud solicitud);
 	
 	public abstract Solicitud insertaActualizaSolicitud(Solicitud solicitud);
+
+	/*public abstract List<Solicitud> listaSolicitudPorEstadoAplicativoFecha(String estado, int id_aplicacion, String fechaRegistro);*/
 	
 	
 }
