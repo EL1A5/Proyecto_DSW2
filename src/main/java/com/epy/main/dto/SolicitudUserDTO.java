@@ -1,6 +1,10 @@
 package com.epy.main.dto;
 
-public class SolicitudUserDTO {
+import java.io.Serializable;
+
+public class SolicitudUserDTO implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	private int codigo;
 	private String estado;
@@ -15,11 +19,6 @@ public class SolicitudUserDTO {
 	//Datos para consulta Av.
 	private String reg_nombres;
 	private String reg_apellidos;
-	
-	public SolicitudUserDTO() {
-		
-	}  
-	
 
 	public SolicitudUserDTO(int codigo, String estado, String fechaInicio, String fechaFin, String prioridad,
 			String aplicacion, String tipoSolicitud, String categoria) {
@@ -34,41 +33,6 @@ public class SolicitudUserDTO {
 		this.categoria = categoria;
 	}
 
-	public SolicitudUserDTO(int codigo, String estado, String fechaInicio, String fechaFin, String prioridad,
-			String aplicacion, String tipoSolicitud, String categoria, String solicitud, String solucion) {
-		super();
-		this.codigo = codigo;
-		this.estado = estado;
-		this.fechaInicio = fechaInicio;
-		this.fechaFin = fechaFin;
-		this.prioridad = prioridad;
-		this.aplicacion = aplicacion;
-		this.tipoSolicitud = tipoSolicitud;
-		this.categoria = categoria;
-		this.solicitud = solicitud;
-		this.solucion = solucion;
-	}
-	
-	
-	
-
-	public SolicitudUserDTO(int codigo, String estado, String fechaInicio, String fechaFin, String prioridad,
-			String aplicacion, String tipoSolicitud, String categoria, String solicitud, String solucion,
-			String reg_nombres, String reg_apellidos) {
-		super();
-		this.codigo = codigo;
-		this.estado = estado;
-		this.fechaInicio = fechaInicio;
-		this.fechaFin = fechaFin;
-		this.prioridad = prioridad;
-		this.aplicacion = aplicacion;
-		this.tipoSolicitud = tipoSolicitud;
-		this.categoria = categoria;
-		this.solicitud = solicitud;
-		this.solucion = solucion;
-		this.reg_nombres = reg_nombres;
-		this.reg_apellidos = reg_apellidos;
-	}
 
 	public int getCodigo() {
 		return codigo;
