@@ -1,6 +1,8 @@
 package com.epy.main.dto;
 
-public class TipoSolicitudDTO {
+import java.io.Serializable;
+
+public class TipoSolicitudDTO implements Serializable {
 	
 	
 	private int idTipoSolicitud;

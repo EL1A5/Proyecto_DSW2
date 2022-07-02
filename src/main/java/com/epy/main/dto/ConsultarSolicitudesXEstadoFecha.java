@@ -1,6 +1,8 @@
 package com.epy.main.dto;
 
-public class ConsultarSolicitudesXEstadoFecha {
+import java.io.Serializable;
+
+public class ConsultarSolicitudesXEstadoFecha implements Serializable{
 	
 	private String estado;
 	private String fecha;

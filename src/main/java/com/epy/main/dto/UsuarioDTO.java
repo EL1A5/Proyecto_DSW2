@@ -1,8 +1,10 @@
 package com.epy.main.dto;
 
+import java.io.Serializable;
+
 import com.epy.main.entity.User;
 
-public class UsuarioDTO {
+public class UsuarioDTO implements Serializable{
 
 	
 	private Long id;

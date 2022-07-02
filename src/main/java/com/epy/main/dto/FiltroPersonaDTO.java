@@ -1,6 +1,8 @@
 package com.epy.main.dto;
 
-public class FiltroPersonaDTO {
+import java.io.Serializable;
+
+public class FiltroPersonaDTO implements Serializable{
 
 	
 	private int tipoUsuario;

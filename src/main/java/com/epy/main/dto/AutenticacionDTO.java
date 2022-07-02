@@ -1,6 +1,8 @@
 package com.epy.main.dto;
 
-public class AutenticacionDTO {
+import java.io.Serializable;
+
+public class AutenticacionDTO implements Serializable {
 	
 	
 	private String username;
