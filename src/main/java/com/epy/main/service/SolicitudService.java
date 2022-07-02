@@ -25,6 +25,8 @@ public interface SolicitudService {
 	
 	public abstract Solicitud insertaActualizaSolicitud(Solicitud solicitud);
 	
+	public List<Solicitud> findByEstadoAndFechaRegistro(String estado, String fecha);
+	
 	
 }
    

@@ -62,6 +62,11 @@ public class SolicitudServiceImpl implements SolicitudService {
 		return solicitudRepository.save(solicitud);
 	}
 
+	@Override
+	public List<Solicitud> findByEstadoAndFechaRegistro(String estado, String fecha) {
+		return solicitudRepository.findByEstadoAndFechaRegistro(estado, fecha);
+	}
+
 
 	
 

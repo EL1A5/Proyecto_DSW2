@@ -37,11 +37,9 @@ public interface SolicitudRepository extends JpaRepository<Solicitud, Integer> {
 					+ " from entity_solicitud sol inner join sol.aplicacion app "
 					+ " inner join sol.tipoSolicitud tip "
 					+ " inner join sol.categoria cat"
-					+ " inner join sol.persona per where sol.estado=?1 and "
-					+ " sol.fechaRegistro between ?2 and ?3"
+					+ " inner join sol.persona per where sol.estado=?1 and sol.fechaRegistro between ?2 and ?3"
 			)
-	public List<SolicitudUserDTO> fetchSolicitudDTODataInnerJoin( String estado, 
-			String fechaInicio, String fechaFin);
+	public List<SolicitudUserDTO> fetchSolicitudDTODataInnerJoin( String estado, String fechaInicio, String fechaFin);
 	
 	
 	@Query(
@@ -67,9 +65,10 @@ public interface SolicitudRepository extends JpaRepository<Solicitud, Integer> {
 			)
 	public int updateSolicitud(int codigo, String fecha, String solucion);
 
+	
+	public List<Solicitud> findByEstadoAndFechaRegistro(String estado, String fecha);
+	
 
-	
-	
 	
 	
 	

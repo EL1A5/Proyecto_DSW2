@@ -12,7 +12,6 @@ public class SolicitudUserDTO {
 	private String categoria;
 	private String solicitud;
 	private String solucion;	
-	//Datos para consulta Av.
 	private String reg_nombres;
 	private String reg_apellidos;
 	

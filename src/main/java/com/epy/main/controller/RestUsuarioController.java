@@ -1,6 +1,7 @@
 package com.epy.main.controller;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.epy.main.dto.AutenticacionDTO;
 import com.epy.main.dto.AutenticacionResponseDTO;
+import com.epy.main.dto.FiltroPersonaDTO;
 import com.epy.main.dto.PersonaDTO;
 import com.epy.main.dto.RptaServerDTO;
 import com.epy.main.dto.UsuarioDTO;
@@ -44,6 +46,18 @@ public class RestUsuarioController {
 	@ResponseBody
 	public ResponseEntity<List<PersonaDTO>> listadoUsuarios() {
 		return ResponseEntity.ok(servicePersona.listadoPersona());
+	}
+	
+	@PostMapping("/listadoFiltro")
+	@ResponseBody
+	public ResponseEntity<List<PersonaDTO>> listadoFiltro(@RequestBody FiltroPersonaDTO dto){
+		List<PersonaDTO> lista = new ArrayList<>();
+		if (dto.getTipoUsuario() == 0 && dto.getDni().equals("")) {
+			lista = servicePersona.findConsultaUsuarioxApellido("%" + dto.getApellidos() + "%");
+		} else {
+			lista = servicePersona.findConsultaUsuario(dto.getTipoUsuario(), dto.getDni());
+		}
+		return ResponseEntity.ok(lista);
 	}
 
 	
@@ -272,6 +286,9 @@ public class RestUsuarioController {
 		System.out.println(rpta.getMensaje());
 		return ResponseEntity.ok(rpta);
 	}
+	
+	
+	
 	
 
 	
