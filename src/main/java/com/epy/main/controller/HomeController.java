@@ -29,7 +29,7 @@ import com.epy.main.service.AplicacionService;
 import com.epy.main.service.CategoriaService;
 import com.epy.main.service.PersonaService;
 import com.epy.main.service.SolicitudService;
-import com.epy.main.service.ITipoSolicitud;
+import com.epy.main.service.TipoSolicitudService;
 import com.epy.main.service.UserService;
 
 @Controller

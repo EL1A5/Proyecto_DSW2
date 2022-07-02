@@ -15,7 +15,7 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
-@Entity
+@Entity(name="entity_tipo_solicitud")
 @Table(name="tipo_solicitud")
 public class TipoSolicitud {
 	

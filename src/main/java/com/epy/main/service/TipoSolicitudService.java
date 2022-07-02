@@ -1,24 +1,15 @@
 package com.epy.main.service;
-
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
+import com.epy.main.dto.TipoSolicitudDTO;
 import com.epy.main.entity.TipoSolicitud;
-import com.epy.main.repository.TipoSolicitudRepository;
 
-@Service
-public class TipoSolicitudService implements ITipoSolicitud {
+public interface TipoSolicitudService {
+	
+	public List<TipoSolicitud> listar();
+	
+	public List<TipoSolicitudDTO> lista();
 
-	@Autowired
-	TipoSolicitudRepository tipoSolicitudRepository;
-	
-	@Override
-	public List<TipoSolicitud> listar() {
-		return tipoSolicitudRepository.findAll();
-	}
-	
 	
 
 }

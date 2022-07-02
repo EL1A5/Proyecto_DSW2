@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.epy.main.dto.SolicitudUserDTO;
+import com.epy.main.dto.SolicitudUsuarioDTO;
 import com.epy.main.entity.Solicitud;
 
 @Repository
@@ -67,6 +68,11 @@ public interface SolicitudRepository extends JpaRepository<Solicitud, Integer> {
 	public int updateSolicitud(int codigo, String fecha, String solucion);
 
 
+	
+	
+	
+	
+	
 	
     
 	

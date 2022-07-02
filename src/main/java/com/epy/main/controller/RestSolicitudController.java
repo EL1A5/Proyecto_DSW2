@@ -1,5 +1,7 @@
 package com.epy.main.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,8 +19,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.epy.main.dto.PersonaDTO;
+import com.epy.main.dto.RptaServerDTO;
+import com.epy.main.dto.SolicitudUserDTO;
+import com.epy.main.dto.SolicitudUsuarioDTO;
 import com.epy.main.entity.Aplicacion;
+import com.epy.main.entity.Categoria;
+import com.epy.main.entity.Persona;
 import com.epy.main.entity.Solicitud;
+import com.epy.main.entity.TipoSolicitud;
 import com.epy.main.service.SolicitudService;
 import com.epy.main.service.SolicitudServiceImpl;
 import com.epy.main.util.Constantes;
@@ -79,6 +88,58 @@ public class RestSolicitudController {
 		}
 		return ResponseEntity.ok(salida);
 	}
+	
+	@PostMapping("/registrarSolicitudNew")
+	@ResponseBody
+	public  ResponseEntity<RptaServerDTO> registrarSolicitudNew(@RequestBody SolicitudUsuarioDTO obj){
+		RptaServerDTO rpta = new RptaServerDTO();
+		
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date date = new Date();
+		
+	
+		Solicitud sol = new Solicitud();
+		TipoSolicitud tip = new TipoSolicitud();
+		tip.setIdTipoSolicitud(obj.getTipoSolicitud());
+		
+		Aplicacion app = new Aplicacion();
+		app.setIdAplicacion(obj.getAplicacion());
+		
+		Categoria cat = new Categoria();
+		cat.setIdCategoria(obj.getCategoria());
+		
+		sol.setDescripcionSolicitud(tip.getDescripcion());
+		sol.setPrioridad(obj.getPrioridad());
+		
+		sol.setEstado("Registrado");
+		sol.setDescripcionSolicitud(obj.getDescripcion());
+		
+		Persona per= new Persona();
+		per.setIdpersona(1); // modificar este valor
+		
+		
+		sol.setTipoSolicitud(tip);
+		sol.setAplicacion(app);
+		sol.setCategoria(cat);
+		sol.setFechaRegistro(sdf.format(date));
+		sol.setPersona(per);
+		
+
+		
+		Solicitud objSalida = solicitudService.insertaActualizaSolicitud(sol);
+		if (objSalida != null) {
+			rpta.setCodigo(1);
+			rpta.setMensaje("Se registro");
+		} else {
+			rpta.setCodigo(0);
+			rpta.setMensaje("No se registro");
+		}
+		System.out.println(rpta.getCodigo());
+		System.out.println(rpta.getMensaje());
+		return ResponseEntity.ok(rpta);
+	}
+	
 	
 	
 	
